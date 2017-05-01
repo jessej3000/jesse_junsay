@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Login</title>
+    </head>
+    <body>
+        <form action="/login" method="post">
+            Username:<input type="text" name="username">
+						<br/>
+            Password:<input type="password" name="password">
+            <input type="submit" value="Login">
+        </form>
+        <span style="color:red">{{.message}}</span>
+        <br />
+        <a href="/register">Register</a>
+        <br />
+        <a href="/forgot">Forgot my username or password</a>
+        <br />
+        <a href="/">Home</a>
+
+    </body>
+</html>

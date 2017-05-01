@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Username and Password Recovery</title>
+    </head>
+    <body>
+        <form action="/forgot" method="post">
+            Please enter your email
+            Email:<input type="text" name="emaildd">
+            <input type="submit" value="Login">
+        </form>
+        <span style="color:red">{{.message}}</span>
+        <br />
+        <a href="/">Home</a>
+    </body>
+</html>

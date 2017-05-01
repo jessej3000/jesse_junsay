@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Profile</title>
+    </head>
+    <body>
+        <form action="/profile" method="post">
+            Username:<input type="text" name="username" value="{{.username}}"/> | Password:<input type="password" name="password" value="{{.password}}"/><br />
+            Type Password Again:<input type="password" name="passwordagain" value="{{.password}}"/><br />
+            Email:<input type="text" name="emailadd" value="{{.email}}" /> | Full Name:<input type="text" name="fullname" value="{{.fullname}}" /><br />
+            Address:<input type="text" name="address" value="{{.address}}" /> | Telephone:<input type="text" name="telephone" value="{{.telephone}}" /><br />
+            <input type="submit" value="Update">
+        </form>
+        <br />
+        <a href="/">Home</a>
+    </body>
+</html>

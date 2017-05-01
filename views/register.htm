@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>Register</title>
+    </head>
+    <body>
+        <form action="/register" method="post">
+            Username:<input type="text" name="username" /> | Password:<input type="password" name="password" /><br />
+            Type Password Again:<input type="password" name="passwordagain" /><br />
+            Email:<input type="text" name="emailadd" /> | Full Name:<input type="text" name="fullname" /><br />
+            Address:<input type="text" name="address" /> | Telephone:<input type="text" name="telephone" /><br />
+            <input type="submit" value="Register">
+        </form>
+        <br />
+				<span style="color:red">{{.message}}</span>
+        <br />
+        <a href="/">Home</a>
+    </body>
+</html>
