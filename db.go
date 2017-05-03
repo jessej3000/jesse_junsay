@@ -8,12 +8,6 @@ import (
 	_ "github.com/ziutek/mymysql/native"
 )
 
-//  Definition			: 		Process google log in
-//	returns					:			(bool) true if successful and false otherwise
-func processGoogleLogIn(googleID string) int {
-	return verifyIfGoogleAccountExist(googleID)
-}
-
 // Description		:			registers new user into the database
 // returns				:			(bool) true if successful and false if error
 func registerGoogleUser(googleID string) int {

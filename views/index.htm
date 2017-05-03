@@ -3,8 +3,6 @@
 
 <head>
   <title>Home</title>
-  <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
@@ -13,17 +11,6 @@
   <a href="/login">Login</a>
   <br />
   <a href="/register">Register</a>
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
 </body>
-
-<script type="text/javascript">
-  function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    alert('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    alert('Name: ' + profile.getName());
-    alert('Image URL: ' + profile.getImageUrl());
-    alert('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-  }
-</script>
 
 </html>
