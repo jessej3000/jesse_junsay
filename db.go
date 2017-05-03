@@ -27,16 +27,8 @@ func registerGoogleUser(googleID string) int64 {
 	}
 
 	query := "INSERT INTO user("
-	query = query + "username,"
-	query = query + "pwd,"
-	query = query + "email,"
-	query = query + "fullname,"
-	query = query + "address,"
-	query = query + "telephone,"
-	query = query + "longitude,"
-	query = query + "latitude,"
 	query = query + "googleacc) "
-	query = query + "VALUES ('','','','','',0,0,?)"
+	query = query + "VALUES (?)"
 
 	res, err := db.Exec(query, googleID)
 
