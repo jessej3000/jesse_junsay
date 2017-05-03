@@ -10,7 +10,7 @@ const (
 	// DBHost MySQL host server
 	DBHost = "127.0.0.1"
 	// DBPort MySQL port
-	DBPort = "8889"
+	DBPort = "3306" //"8889"
 	// WebServerPort for golang web server
 	WebServerPort = "8080"
 	// WebHost for golang web server
