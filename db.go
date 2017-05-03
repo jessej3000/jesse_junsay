@@ -21,7 +21,7 @@ func registerGoogleUser(googleID string) int64 {
 		panic(err)
 	}*/
 
-	db, err := sql.Open("mysql", DBUser+":"+DBUser+"@/apidb?charset=utf8")
+	db, err := sql.Open("mysql", DBUser+":"+DBPassword+"@/apidb?charset=utf8")
 	if err != nil {
 		panic(err)
 	}
