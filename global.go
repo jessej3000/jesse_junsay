@@ -13,6 +13,8 @@ const (
 	DBPort = "8889"
 	// WebServerPort for golang web server
 	WebServerPort = "8080"
+	// WebHost for golang web server
+	WebHost = "52.36.191.60"
 )
 
 type result struct {

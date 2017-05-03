@@ -16,5 +16,5 @@ func serveHTTP() {
 	http.HandleFunc("/profile", handleProfile)
 	http.HandleFunc("/forgot", handleForgot)
 
-	http.ListenAndServe("localhost:"+WebServerPort, nil)
+	http.ListenAndServe(WebHost+":"+WebServerPort, nil)
 }
