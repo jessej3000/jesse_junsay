@@ -29,20 +29,20 @@ func registerGoogleUser(googleID string) int {
 	query = query + "latitude,"
 	query = query + "googleacc) "
 	query = query + "VALUES ('','','','','',0,0,'"
-	query = query + googleID + "')"
+	query = query + googleID + "');SELECT LAST_INSERT_ID();"
 
 	_, res, err := db.Query(query)
 	if res == nil {
 		//Do nothing
 	}
 
-	query = "SELECT LAST_INSERT_ID();"
+	/*query = "SELECT LAST_INSERT_ID();"
 	_, ress, err := db.Query(query)
 	if err != nil {
 		panic(err)
-	}
+	}*/
 
-	row, err := ress.GetRow()
+	row, err := res.GetRow()
 	if err != nil {
 		panic(err)
 	}
