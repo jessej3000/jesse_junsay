@@ -14,7 +14,7 @@ func handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 			if id := verifyIfGoogleAccountExist(r.FormValue("googleID")); id > 0 {
 				//log in and redirect to landing page
 				//Check cookie
-				MyID = id
+				MyID = int(id)
 				cookie, err := r.Cookie("logged")
 				if err == http.ErrNoCookie { // if not then create one
 					cookie = &http.Cookie{

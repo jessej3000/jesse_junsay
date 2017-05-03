@@ -1,6 +1,7 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"strconv"
 
@@ -10,10 +11,16 @@ import (
 
 // Description		:			registers new user into the database
 // returns				:			(bool) true if successful and false if error
-func registerGoogleUser(googleID string) int {
-	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+func registerGoogleUser(googleID string) int64 {
+
+	/*db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
 
 	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}*/
+
+	db, err := sql.Open("mysql", DBUser+":"+DBUser+"@/apidb?charset=utf8")
 	if err != nil {
 		panic(err)
 	}
@@ -28,35 +35,26 @@ func registerGoogleUser(googleID string) int {
 	query = query + "longitude,"
 	query = query + "latitude,"
 	query = query + "googleacc) "
-	query = query + "VALUES ('','','','','',0,0,'"
-	query = query + googleID + "');SELECT LAST_INSERT_ID();"
+	query = query + "VALUES ('','','','','',0,0,?)"
 
-	_, res, err := db.Query(query)
-	if res == nil {
-		//Do nothing
-	}
+	res, err := db.Exec(query, googleID)
 
-	/*query = "SELECT LAST_INSERT_ID();"
-	_, ress, err := db.Query(query)
 	if err != nil {
 		panic(err)
-	}*/
-
-	row, err := res.GetRow()
-	if err != nil {
-		panic(err)
-	}
-
-	if len(row) > 0 {
-		return row.Int(0)
 	} else {
-		return 0
+		id, err := res.LastInsertId()
+		if err != nil {
+			return 0
+		} else {
+			return id
+		}
 	}
+
 }
 
 //  Definition			: 		Verify if google account exist and returns the id
 //	returns					:			(int) if id exist returns the id and if not create the record and return the new id
-func verifyIfGoogleAccountExist(googleID string) int {
+func verifyIfGoogleAccountExist(googleID string) int64 {
 	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
 
 	err := db.Connect()
@@ -76,7 +74,7 @@ func verifyIfGoogleAccountExist(googleID string) int {
 
 	if len(row) > 0 { // If user exist return the id
 		// Return true as success with the id number
-		return row.Int(0)
+		return row.Int64(0)
 	} else { //If user does not exist, register then return the new id
 		return registerGoogleUser(googleID)
 	}
