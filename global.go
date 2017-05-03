@@ -8,7 +8,7 @@ const (
 	// DBName database name
 	DBName = "apidb"
 	// DBHost MySQL host server
-	DBHost = "127.0.0.1"
+	DBHost = "localhost"
 	// DBPort MySQL port
 	DBPort = "3306" //"8889"
 	// WebServerPort for golang web server
