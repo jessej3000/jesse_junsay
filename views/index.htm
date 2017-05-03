@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>Home</title>
-    <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    </head>
-    <body>
-        <a1>Welcome to my page.</a1>
-        <br />
-        <a href="/login">Login</a>
-        <br  />
-        <a href="/register">Register</a>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    </body>
+
+<head>
+  <title>Home</title>
+  <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script type="text/javascript">
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      alert.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      alert.log('Name: ' + profile.getName());
+      alert.log('Image URL: ' + profile.getImageUrl());
+      alert.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+  </script>
+</head>
+
+<body>
+  <a1>Welcome to my page.</a1>
+  <br />
+  <a href="/login">Login</a>
+  <br />
+  <a href="/register">Register</a>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+</body>
+
 </html>
