@@ -4,7 +4,7 @@ const (
 	// DBUser MySQL database username
 	DBUser = "root" //"test" //
 	// DBPassword MySQL database password
-	DBPassword = "root" //"test" //
+	DBPassword = "" //"root" //"test" //
 	// DBName database name
 	DBName = "apidb"
 	// DBHost MySQL host server
