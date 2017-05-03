@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/ziutek/mymysql/mysql"
 	_ "github.com/ziutek/mymysql/native"
 )
