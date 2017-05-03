@@ -8,6 +8,86 @@ import (
 	_ "github.com/ziutek/mymysql/native"
 )
 
+//  Definition			: 		Process google log in
+//	returns					:			(bool) true if successful and false otherwise
+func processGoogleLogIn(googleID string) int {
+	return verifyIfGoogleAccountExist(googleID)
+}
+
+// Description		:			registers new user into the database
+// returns				:			(bool) true if successful and false if error
+func registerGoogleUser(googleID string) int {
+	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+
+	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}
+
+	query := "INSERT INTO user("
+	query = query + "username,"
+	query = query + "pwd,"
+	query = query + "email,"
+	query = query + "fullname,"
+	query = query + "address,"
+	query = query + "telephone,"
+	query = query + "longitude,"
+	query = query + "latitude,"
+	query = query + "googleacc) "
+	query = query + "VALUES ('','','','','',0,0,'"
+	query = query + googleID + "')"
+
+	_, res, err := db.Query(query)
+	if res == nil {
+		//Do nothing
+	}
+
+	query = "SELECT LAST_INSERT_ID();"
+	_, ress, err := db.Query(query)
+	if err != nil {
+		panic(err)
+	}
+
+	row, err := ress.GetRow()
+	if err != nil {
+		panic(err)
+	}
+
+	if len(row) > 0 {
+		return row.Int(0)
+	} else {
+		return 0
+	}
+}
+
+//  Definition			: 		Verify if google account exist and returns the id
+//	returns					:			(int) if id exist returns the id and if not create the record and return the new id
+func verifyIfGoogleAccountExist(googleID string) int {
+	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+
+	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := db.Start("SELECT * FROM user WHERE googleacc='" + googleID + "'")
+	if err != nil {
+		panic(err)
+	}
+
+	row, err := res.GetRow()
+	if err != nil {
+		panic(err)
+	}
+
+	if len(row) > 0 { // If user exist return the id
+		// Return true as success with the id number
+		return row.Int(0)
+	} else { //If user does not exist, register then return the new id
+		return registerGoogleUser(googleID)
+	}
+}
+
 //  Definition      :     verifyUser function to verify if user exist and password is correct in the database
 //  Returns         :     (bool),(int) returns true or false, and returns id of user
 func verifyUser(username string, pwd string) (bool, int) {
@@ -100,7 +180,7 @@ func registerUser(person user) bool {
 	query = query + "0,"
 	query = query + "0,'"
 	query = query + person.googleacc + "')"
-	fmt.Println(query)
+
 	_, res, err := db.Query(query)
 	if res == nil {
 		//Do nothing

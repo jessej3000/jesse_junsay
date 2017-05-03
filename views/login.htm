@@ -1,22 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>Login</title>
-    </head>
-    <body>
-        <form action="/login" method="post">
-            Username:<input type="text" name="username">
-						<br/>
-            Password:<input type="password" name="password">
-            <input type="submit" value="Login">
-        </form>
-        <span style="color:red">{{.message}}</span>
-        <br />
-        <a href="/register">Register</a>
-        <br />
-        <a href="/forgot">Forgot my username or password</a>
-        <br />
-        <a href="/">Home</a>
 
-    </body>
+<head>
+  <title>Login</title>
+  <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <form id="form1" action="/login" method="post">
+    <input type="hidden" name="loggedid" id="loggedid"/>
+    <input type="hidden" name="googleID" id="googleID"/> Username:
+    <input type="text" name="username">
+    <br/> Password:
+    <input type="password" name="password">
+    <input type="submit" value="Login">
+  </form>
+  <br />
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <br />
+  <span style="color:red">{{.message}}</span>
+  <br />
+  <a href="/register">Register</a>
+  <br />
+  <a href="/forgot">Forgot my username or password</a>
+  <br />
+  <a href="/">Home</a>
+
+</body>
+<script type="text/javascript">
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    $("#googleID").val(profile.getId());
+    $("#loggedin").val(true);
+
+    $("#search-form").attr("action", "/googlelogin");
+    $("#form1").submit(function(event) {
+      event.preventDefault();
+    });
+  }
+</script>
+
 </html>
