@@ -14,7 +14,7 @@ const (
 	// WebServerPort for golang web server
 	WebServerPort = "8080"
 	// WebHost for golang web server
-	WebHost = "172.31.42.235"
+	WebHost = "localhost" //"172.31.42.235"
 )
 
 type result struct {
