@@ -21,13 +21,12 @@
   <div id="my-signin2"></div>
   <script>
     function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onClick(googleUser){
-      alert(0000)
+      $("#googleID").val(profile.getId());
+      $("#loggedin").val(true);
+      $("#form1").submit();
     }
     function onFailure(error) {
-      console.log(error);
+      alert(error);
     }
     function renderButton() {
       gapi.signin2.render('my-signin2', {
@@ -53,11 +52,5 @@
   <a href="/">Home</a>
 
 </body>
-<script type="text/javascript">
-
-    $("#googleID").val(profile.getId());
-    $("#loggedin").val(true);
-
-</script>
 
 </html>
