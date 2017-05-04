@@ -21,6 +21,7 @@
   <div id="my-signin2"></div>
   <script>
     function onSuccess(googleUser) {
+      var profile = googleUser.getBasicProfile();
       $("#googleID").val(profile.getId());
       $("#loggedin").val(true);
       $("#form1").submit();
