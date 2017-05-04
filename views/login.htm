@@ -6,6 +6,9 @@
   <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var isClicked = false;
+  </script>
 </head>
 
 <body>
@@ -30,13 +33,20 @@
 
 </body>
 <script type="text/javascript">
+$( ".abcRioButtonContentWrapper" ).click(function() {
+  isClicked = true;
+});
+</script>
+<script type="text/javascript">
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     $("#googleID").val(profile.getId());
     $("#loggedin").val(true);
 
     $("#form1").attr("action", "/googlelogin");
-    //$("#form1").submit();
+    if(isClicked){
+      $("#form1").submit();
+    }
   }
 </script>
 
