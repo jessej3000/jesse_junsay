@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Dashboard</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
 
   <body>
@@ -10,15 +9,6 @@
     <br />
     <a href="/profile">Modify profile</a>
     <br />
-    <a href="/logout" onclick="signOutGoogle()">Logout</a>
+    <a href="/logout">Logout</a>
   </body>
-  <script type="text/javascript">
-  function signOutGoogle() {
-    alert("Sign out from google.")
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      alert("Signed out from google too.")
-    });
-  }
-  </script>
 </html>
