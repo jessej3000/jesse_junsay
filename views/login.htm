@@ -33,6 +33,7 @@
 <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
+    $("#form1").attr("action","/googlelogin")
     $("#googleID").val(profile.getId());
     $("#loggedin").val(true);
     $("#form1").submit();
