@@ -34,7 +34,7 @@
     var profile = googleUser.getBasicProfile();
     $("#googleID").val(profile.getId());
     $("#loggedin").val(true);
-    alert(profile.getId());
+    
     $("#form1").attr("action", "/googlelogin");
     $("#form1").submit();
   }
