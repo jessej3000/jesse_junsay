@@ -6,22 +6,40 @@
   <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
-  <script type="text/javascript">
-    var isClicked = false;
-  </script>
 </head>
 
 <body>
   <form id="form1" action="/login" method="post">
-    <input type="hidden" name="loggedin" id="loggedin"/>
-    <input type="hidden" name="googleID" id="googleID"/> Username:
+    <input type="hidden" name="loggedin" id="loggedin" />
+    <input type="hidden" name="googleID" id="googleID" /> Username:
     <input type="text" name="username">
     <br/> Password:
     <input type="password" name="password">
     <input type="submit" value="Login">
   </form>
   <br />
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <div id="my-signin2"></div>
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
   <br />
   <span style="color:red">{{.message}}</span>
   <br />
@@ -33,21 +51,10 @@
 
 </body>
 <script type="text/javascript">
-$( ".abcRioButtonContentWrapper" ).click(function() {
-  isClicked = true;
-});
-</script>
-<script type="text/javascript">
-  function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
+
     $("#googleID").val(profile.getId());
     $("#loggedin").val(true);
 
-    $("#form1").attr("action", "/googlelogin");
-    if(isClicked){
-      $("#form1").submit();
-    }
-  }
 </script>
 
 </html>
