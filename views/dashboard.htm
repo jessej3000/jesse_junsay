@@ -14,9 +14,10 @@
   </body>
   <script type="text/javascript">
   function signOutGoogle() {
+    alert("Sign out from google.")
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      //do nothing
+      alert("Signed out from google too.")
     });
   }
   </script>
