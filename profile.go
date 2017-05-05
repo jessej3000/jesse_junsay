@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Description      :       handle registration
+// Description      :       handle profile view and edit
 // returns          :       None
 func handleProfile(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("logged")

@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Description      :     Login handler
+// Description      :     Handles request for password reset
 // returns          :     None
 func handleResetPassword(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {

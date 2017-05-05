@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// Description      :       handle registration
+// Description      :       handle reset password
 // returns          :       None
 func handleForgot(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
@@ -37,7 +37,6 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 			"",
 			"",
 		}
-		// Do something here
 		if id, code := processReset(usr); len(code) > 0 { // sendEmailLink
 			//Send email link
 			sendPasswordResetLink(usr.email, id, code)
@@ -45,7 +44,7 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 			s, _ := template.ParseFiles("views/linksent.htm")
 			data := map[string]string{"message": "Password reset sent to your email."}
 			s.Execute(w, data)
-		} else {
+		} else { // Email does not exist
 			http.Redirect(w, r, "/forgot?msg=Email does not exist.", http.StatusSeeOther)
 		}
 

@@ -12,7 +12,7 @@ func handleLogout(w http.ResponseWriter, r *http.Request) {
 	if err == nil { // if cookie exist
 		cookie.Value = "0"
 		cookie.MaxAge = -1
-		http.SetCookie(w, cookie)
+		http.SetCookie(w, cookie) // destroy cookie by setting it to 0
 	}
 
 	f, _ := template.ParseFiles("views/index.htm")

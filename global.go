@@ -17,10 +17,12 @@ const (
 	WebHost = "172.31.42.235"
 )
 
+// Generic struct for UI messages
 type result struct {
 	message string
 }
 
+// User struct to hold user info (user model)
 type user struct {
 	username  string
 	password  string
@@ -35,4 +37,6 @@ type user struct {
 
 // MyID global id of the user will later be set during login
 var MyID = 0
+
+// ResetID global user id for password reset
 var ResetID = ""

@@ -6,7 +6,7 @@ func main() {
 	serveHTTP()
 }
 
-// Server
+// Server and handlers
 func serveHTTP() {
 	http.HandleFunc("/", handleHome)
 	http.HandleFunc("/login", handleLogin)

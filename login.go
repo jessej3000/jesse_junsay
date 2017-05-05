@@ -14,9 +14,7 @@ func handleLogin(w http.ResponseWriter, r *http.Request) {
 
 		if len(msgMap) > 0 {
 			if val, ok := msgMap["msg"]; ok {
-				//res := result{message: val[0]}
-				res := map[string]string{"message": val[0]}
-				//fmt.Print(res.message)
+				res := map[string]string{"message": val[0]} // set return message
 				f.Execute(w, res)
 			} else {
 				f.Execute(w, nil)
