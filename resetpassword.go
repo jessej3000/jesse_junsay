@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -15,7 +16,9 @@ func handleResetPassword(w http.ResponseWriter, r *http.Request) {
 		if len(msgMap) > 0 {
 			if val, ok := msgMap["code"]; ok { // Check if code exist
 				// Check if code exist
-				if checkIfCodeExist(val[0]) { //Show reset view
+				fmt.Println("CODE=====" + val[0])
+				if p := checkIfCodeExist(val[0]); p { //Show reset view
+					fmt.Println(p)
 					ResetID = msgMap["id"][0]
 					f.Execute(w, nil)
 				} else {
