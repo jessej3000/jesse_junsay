@@ -5,7 +5,7 @@ import (
 	"strconv"
 )
 
-// Description	: Sends out password reset link to email
+// Description	: Sends smtp email using google smtp server
 // Returns			: None
 func sendPasswordResetLink(email string, id int64, code string) {
 	from := "jessejmwp2017@gmail.com"

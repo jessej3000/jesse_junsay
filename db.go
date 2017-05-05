@@ -242,7 +242,7 @@ func getUser(id int) map[string]string {
 	person := make(map[string]string)
 
 	if len(row) > 0 {
-		// Return true as success with the id number
+		// Fill up map values
 		person["username"] = row.Str(0)
 		person["password"] = row.Str(1)
 		person["email"] = row.Str(2)
