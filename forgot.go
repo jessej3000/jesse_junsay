@@ -33,8 +33,8 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 			"",
 			"",
 			"",
-			0,
-			0,
+			"",
+			"",
 			"",
 		}
 		// Do something here

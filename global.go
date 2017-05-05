@@ -28,8 +28,8 @@ type user struct {
 	fullname  string
 	address   string
 	telephone string
-	longitude float64
-	latitude  float64
+	longitude string
+	latitude  string
 	googleacc string
 }
 

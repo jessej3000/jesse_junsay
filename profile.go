@@ -26,8 +26,8 @@ func handleProfile(w http.ResponseWriter, r *http.Request) {
 					r.FormValue("fullname"),
 					r.FormValue("address"),
 					r.FormValue("telephone"),
-					0,
-					0,
+					r.FormValue("lon"),
+					r.FormValue("lat"),
 					"",
 				}
 				//Check if username and password are correct

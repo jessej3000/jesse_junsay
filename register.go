@@ -27,15 +27,16 @@ func handleRegister(w http.ResponseWriter, r *http.Request) {
 
 	} else if r.Method == "POST" {
 		r.ParseForm()
+
 		usr := user{
 			r.FormValue("username"),
 			r.FormValue("password"),
 			r.FormValue("emailadd"),
 			r.FormValue("fullname"),
 			r.FormValue("address"),
-			r.FormValue("telephon"),
-			0,
-			0,
+			r.FormValue("telephone"),
+			r.FormValue("lon"),
+			r.FormValue("lat"),
 			"",
 		}
 		//Check if username and password are correct
