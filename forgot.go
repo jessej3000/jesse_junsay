@@ -23,7 +23,6 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 		} else {
 			f.Execute(w, nil)
 		}
-		f.Execute(w, nil)
 
 	} else if r.Method == "POST" {
 		r.ParseForm()
