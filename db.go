@@ -1,8 +1,10 @@
 package main
 
 import (
+	"crypto/rand"
 	"database/sql"
 	"fmt"
+	"io"
 	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -13,13 +15,6 @@ import (
 // Description		:			registers new user into the database
 // returns				:			(bool) true if successful and false if error
 func registerGoogleUser(googleID string) int64 {
-
-	/*db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
-
-	err := db.Connect()
-	if err != nil {
-		panic(err)
-	}*/
 
 	db, err := sql.Open("mysql", DBUser+":"+DBPassword+"@/apidb?charset=utf8")
 	if err != nil {
@@ -267,6 +262,82 @@ func getUser(id int) map[string]string {
 
 // Description		:			process reset link for password
 // returns				:			none
-func processReset(person user) {
-	return
+func processReset(person user) (int64, string) {
+	//Check if email exist
+	if id := checkIfEmailExist(person.email); id > 0 { //sendEmailLink
+		// Generate guid and save id
+		GID := GUID()
+		setCode(id, GID)
+		return id, ""
+	} else { //Else email not found
+		return 0, ""
+	}
+}
+
+// Description 		:			Check if email exist
+// returns				:			(string) returns the email if exist
+func checkIfEmailExist(email string) int64 {
+	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+
+	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := db.Start("SELECT id FROM user WHERE email='" + email + "'")
+	if err != nil {
+		panic(err)
+	}
+
+	row, err := res.GetRow()
+	if err != nil {
+		panic(err)
+	}
+
+	if len(row) > 0 {
+		// Return true as success with the id number
+		return row.Int64(0)
+	} else {
+		return 0
+	}
+}
+
+// Description		:			Function to create a guid
+// returns				:			(string)
+func GUID() string {
+	UID := make([]byte, 16)
+	res, err := io.ReadFull(rand.Reader, UID)
+
+	if err != nil {
+		panic(err)
+	}
+
+	if res != len(UID) {
+		return ""
+	}
+
+	UID[8] = UID[8]&^0xc0 | 0x80
+	UID[6] = UID[6]&^0xf0 | 0x40
+	return fmt.Sprintf("%x-%x-%x-%x-%x", UID[0:4], UID[4:6], UID[6:8], UID[8:10], UID[10:])
+}
+
+func setCode(id int64, code string) {
+	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+
+	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}
+
+	query := "UPDATE user "
+	query = query + "SET resetcode = '" + code + "' "
+	query = query + "WHERE id = " + strconv.Itoa(int(id))
+
+	_, res, err := db.Query(query)
+	if res == nil {
+		//Do nothing
+	}
+	if err != nil {
+		panic(err)
+	}
 }
