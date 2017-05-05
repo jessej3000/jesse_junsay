@@ -195,7 +195,6 @@ func updateUser(person user) bool {
 	query = query + "googleacc = '' "
 	query = query + "WHERE id = " + strconv.Itoa(MyID)
 
-	fmt.Println(query)
 	_, res, err := db.Query(query)
 	if res == nil {
 		//Do nothing
@@ -383,7 +382,7 @@ func updatePassword(id string, password string) bool {
 		return false
 	}
 
-	query := "UPDATE user "
+	query := "UPDATE user SET "
 	query = query + "pwd = SHA1('" + password + "'), "
 	query = query + "resetcode = '' "
 	query = query + "WHERE id = " + id
