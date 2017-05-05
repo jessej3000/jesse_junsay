@@ -42,7 +42,9 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 			//Send email link
 			sendPasswordResetLink(usr.email, id, code)
 			//Redirect to confirmation of email sent
-			http.Redirect(w, r, "/linksent?msg=Password reset link sent to your email.", http.StatusSeeOther)
+			s, _ := template.ParseFiles("views/linksent.htm")
+			data := map[string]string{"message": "Password reset sent to your email."}
+			s.Execute(w, data)
 		} else {
 			http.Redirect(w, r, "/forgot?msg=Email does not exist.", http.StatusSeeOther)
 		}
