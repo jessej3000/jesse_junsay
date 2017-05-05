@@ -1,6 +1,9 @@
 package main
 
-import "net/smtp"
+import (
+	"net/smtp"
+	"strconv"
+)
 
 // Description	: Sends out password reset link to email
 // Returns			: None
@@ -8,11 +11,11 @@ func sendPasswordResetLink(email string, id int64, code string) {
 	from := "jessejmwp2017@gmail.com"
 	pass := "20mwp17golang"
 
-	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n"
+	mime := "MIME-version: 1.0;\nContent-Type: text/html; charset=\"UTF-8\";\n\n;"
 	to := email
-	href := "http://view-source:ec2-52-36-191-60.us-west-2.compute.amazonaws.com:8080/resetpassword?id=" + string(id) + "&code=" + code
+	href := "http://view-source:ec2-52-36-191-60.us-west-2.compute.amazonaws.com:8080/resetpassword?id=" + strconv.Itoa(int(id)) + "&code=" + code
 	link := "<a href='" + href + "'>" + href + "</>"
-	body := "Please follow the link to reset password: " + link
+	body := "<html><body>Please follow the link to reset password: " + link + "</body></html>"
 
 	msg := "From: " + from + "\n" +
 		"To: " + to + "\n" +
