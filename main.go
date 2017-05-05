@@ -16,6 +16,7 @@ func serveHTTP() {
 	http.HandleFunc("/profile", handleProfile)
 	http.HandleFunc("/forgot", handleForgot)
 	http.HandleFunc("/googlelogin", handleGoogleLogin)
+	http.HandleFunc("/resetpassword", handleResetPassword)
 
 	http.ListenAndServe(WebHost+":"+WebServerPort, nil)
 }

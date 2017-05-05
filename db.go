@@ -321,6 +321,8 @@ func GUID() string {
 	return fmt.Sprintf("%x-%x-%x-%x-%x", UID[0:4], UID[4:6], UID[6:8], UID[8:10], UID[10:])
 }
 
+// Description			:			sets the reset code
+// returns					:			none
 func setCode(id int64, code string) {
 	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
 
@@ -340,4 +342,61 @@ func setCode(id int64, code string) {
 	if err != nil {
 		panic(err)
 	}
+}
+
+// Description 		:			Check if reset code exist
+// returns				:			(bool) returns true or false otherwise
+func checkIfCodeExist(code string) bool {
+	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+
+	err := db.Connect()
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := db.Start("SELECT id FROM user WHERE resetcode='" + code + "'")
+	if err != nil {
+		panic(err)
+	}
+
+	row, err := res.GetRow()
+	if err != nil {
+		panic(err)
+	}
+
+	if len(row) > 0 {
+		// Return true as success with the id number
+		return true
+	} else {
+		return false
+	}
+}
+
+// Description		:			update user password in the database
+// returns				:			(bool) true if successful and false if error
+func updatePassword(id string, password string) bool {
+	db := mysql.New("tcp", "", DBHost+":"+DBPort, DBUser, DBPassword, DBName)
+
+	err := db.Connect()
+	if err != nil {
+		//panic(err)
+		return false
+	}
+
+	query := "UPDATE user "
+	query = query + "pwd = SHA1('" + password + "'), "
+	query = query + "resetcode = '' "
+	query = query + "WHERE id = " + id
+
+	fmt.Println(query)
+	_, res, err := db.Query(query)
+	if res == nil {
+		//Do nothing
+	}
+	if err != nil {
+		//panic(err)
+		return false
+	}
+
+	return true
 }

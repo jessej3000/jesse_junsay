@@ -35,3 +35,4 @@ type user struct {
 
 // MyID global id of the user will later be set during login
 var MyID = 0
+var ResetID = ""
