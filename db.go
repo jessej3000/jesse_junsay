@@ -268,7 +268,7 @@ func processReset(person user) (int64, string) {
 		// Generate guid and save id
 		GID := GUID()
 		setCode(id, GID)
-		return id, ""
+		return id, GID
 	} else { //Else email not found
 		return 0, ""
 	}
