@@ -12,7 +12,7 @@ func sendPasswordResetLink(email string, id int64, code string) {
 	pass := "20mwp17golang"
 
 	to := email
-	href := "http://view-source:ec2-52-36-191-60.us-west-2.compute.amazonaws.com:8080/resetpassword?id=" + strconv.Itoa(int(id)) + "&code=" + code
+	href := "http://ec2-52-36-191-60.us-west-2.compute.amazonaws.com:8080/resetpassword?id=" + strconv.Itoa(int(id)) + "&code=" + code
 	link := "<a href='" + href + "'>" + href + "</>"
 	body := "<html><body>Please follow the link to reset password: " + link + "</body></html>"
 
