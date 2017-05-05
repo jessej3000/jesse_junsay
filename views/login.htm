@@ -5,7 +5,6 @@
   <title>Login</title>
   <meta name="google-signin-client_id" content="915233699233-fs3mq3sgcc4kuh0ruofoleqmq72at278.apps.googleusercontent.com">
   <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -33,10 +32,10 @@
 <script>
   function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
-    $("#form1").attr("action","/googlelogin")
-    $("#googleID").val(profile.getId());
-    $("#loggedin").val(true);
-    $("#form1").submit();
+    document.getElementsByTagName('form')[0].setAttribute('action','/googlelogin');
+    document.getElementById('googleID').value = profile.getId();
+    document.getElementById('loggedin').value = true;
+    document.getElementsByTagName('form')[0].submit();
   }
 </script>
 

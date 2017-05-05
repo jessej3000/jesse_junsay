@@ -9,10 +9,12 @@
   <form action="/register" method="post">
     Username:<input type="text" name="username" /> | Password:<input type="password" name="password" /><br /> Type Password Again:<input type="password" name="passwordagain" /><br /> Email:
     <input type="text" name="emailadd" /> | Full Name:<input type="text" name="fullname" />
-    <br /><br /> Address:<input type="text" name="address" id="address" /><input id="submit" type="button" value="Geocode">
+    <br /><br /> Address:<input type="text" name="address" id="address" /><input id="submit" type="button" value="Locate on Map">
     <br />
-    <div id="map"></div>
+    <div id="map" style="height:400px;"></div>
     <br /><br /> Telephone:
+    <input type="hidden" name="lon" id="lon" />
+    <input type="hidden" name="lat" id="lat"/>
     <input type="text" name="telephone" /><br />
     <input type="submit" value="Register">
   </form>
@@ -43,6 +45,8 @@
               map: resultsMap,
               position: results[0].geometry.location
             });
+            document.getElementById('lon').value = results[0].geometry.location.lng();
+            document.getElementById('lat').value = results[0].geometry.location.lat();
           } else {
             alert('Geocode was not successful for the following reason: ' + status);
           }
