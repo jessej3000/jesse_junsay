@@ -37,6 +37,7 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 			0,
 			"",
 		}
+		http.Redirect(w, r, "/forgot?msg="+user.email, http.StatusSeeOther)
 		// Do something here
 		if id, code := processReset(usr); len(code) > 0 { // sendEmailLink
 			//Send email link
