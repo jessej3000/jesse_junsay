@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-    <head>
-    <title>Profile</title>
-    </head>
-    <body>
-      <form action="/profile" method="post">
-        Username:<input type="text" name="username" /> | Password:<input type="password" name="password" /><br /> Type Password Again:<input type="password" name="passwordagain" /><br /> Email:
-        <input type="text" name="emailadd" /> | Full Name:<input type="text" name="fullname" />
-        <br /><br /> Address:<input type="text" name="address" id="address" /><input id="submit" type="button" value="Locate on Map">
-        <br />
-        <div id="map" style="height:400px;"></div>
-        <br /><br /> Telephone:
-        <input type="hidden" name="lon" id="lon" />
-        <input type="hidden" name="lat" id="lat"/>
-        <input type="text" name="telephone" /><br />
-        <input type="submit" value="Update">
-      </form>
-      <br />
-      <span style="color:red">{{.message}}</span>
-      <br />
-      <a href="/">Home</a>
-    </body>
+
+<head>
+  <title>Profile</title>
+</head>
+
+<body>
+  person["username"] = row.Str(0) person["password"] = row.Str(1) person["email"] = row.Str(2) person["fullname"] = row.Str(3) person["address"] = row.Str(4) person["telephone"] = row.Str(5) person["longitude"] = row.Str(6) person["latitude"] = row.Str(7)
+  person["googleacc"] = row.Str(8)
+  <form action="/profile" method="post">
+    Username:<input type="text" name="username" value={{.username}}/> | Password:<input type="password" name="password" value={{.password}}/><br /> Type Password Again:<input type="password" name="passwordagain" value={{.password}}/><br /> Email:
+    <input type="text" name="emailadd" value={{.email}} /> | Full Name:<input type="text" name="fullname" value={{.fullname}} />
+    <br /><br /> Address:<input type="text" name="address" id="address" value={{.address}} /><input id="submit" type="button" value="Locate on Map">
+    <br />
+    <div id="map" style="height:400px;"></div>
+    <br /><br /> Telephone:
+    <input type="hidden" name="lon" id="lon" value={{.longitude}} />
+    <input type="hidden" name="lat" id="lat" value={{.latitude}} />
+    <input type="text" name="telephone" /><br />
+    <input type="submit" value="Update">
+  </form>
+  <br />
+  <span style="color:red">{{.message}}</span>
+  <br />
+  <a href="/">Home</a>
+</body>
+
 </html>
