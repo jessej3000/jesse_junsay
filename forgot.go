@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
+	"strconv"
 )
 
 // Description      :       handle registration
@@ -39,7 +40,7 @@ func handleForgot(w http.ResponseWriter, r *http.Request) {
 		}
 		// Do something here
 		id, code := processReset(usr)
-		http.Redirect(w, r, "/forgot?msg="+string(id)+"::"+code, http.StatusSeeOther)
+		http.Redirect(w, r, "/forgot?msg="+strconv.Itoa(int(id))+"::"+code, http.StatusSeeOther)
 		//if id, code := processReset(usr); len(code) > 0 { // sendEmailLink
 		if len(code) > 0 {
 			//Send email link
